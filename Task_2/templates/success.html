@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Success</title>
+    </head>
+
+    <body>
+        <h2>Data submitted successfully</h2>
+
+        <h3>Student List</h3>
+
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+
+            <tbody id="students"></tbody>
+        </table>
+
+        <script>
+            fetch("/api/students")
+                .then((response) => response.json())
+                .then((data) => {
+                    let rows = "";
+
+                    data.forEach((student) => {
+                        rows += `
+                    <tr>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+                    </tr>
+                `;
+                    });
+
+                    document.getElementById("students").innerHTML = rows;
+                });
+        </script>
+    </body>
+</html>
